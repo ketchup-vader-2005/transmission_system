@@ -29,3 +29,4 @@ Training_Dataset = vertcat(training_data_faults,training_data_healthy);
 save("training_data_faults.mat", "training_data_faults");
 save("training_data_healthy.mat", "training_data_healthy");
 save("Training_Dataset.mat", "Training_Dataset");
+parquetwrite("Training_Dataset.parquet", Training_Dataset);
