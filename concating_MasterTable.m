@@ -122,7 +122,7 @@ training_data_switching_2 = vertcat(storage_bucket_switching_2{:});
 training_data_switching_3 = vertcat(storage_bucket_switching_3{:});
 training_data_switching_4 = vertcat(storage_bucket_switching_4{:});
 training_data_switching = vertcat(training_data_switching_1, training_data_switching_2, training_data_switching_3, training_data_switching_4);
-Training_Dataset = vertcat(training_data_faults,training_data_healthy, training_data_switching);
+Training_Dataset = vertcat(training_data_faults, training_data_switching, training_data_healthy);
 save("training_data_switching.mat", "training_data_switching");
 save("training_data_faults.mat", "training_data_faults");
 save("training_data_healthy.mat", "training_data_healthy");
