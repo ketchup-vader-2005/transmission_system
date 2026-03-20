@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MF0 version="1.1" packageUris="http://schema.mathworks.com/mf0/faultinfo_datamodel/R2021a">
+  <faultinfo.FailureModeContainer type="faultinfo.FailureModeContainer" uuid="a24e5f46-6528-45a1-8b4e-ed2d5fe5ef48">
+    <failureModes type="faultinfo.FailureMode" uuid="2f6933b3-0895-43fb-a55d-27fb5f56d1b5">
+      <ID>1</ID>
+      <associatedFaults type="faultinfo.SSFault" uuid="523cc183-451b-4f33-b957-2cd6a3b09a8a"/>
+      <faultSubsystemName>Fault1</faultSubsystemName>
+      <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
+    </failureModes>
+    <failureModes type="faultinfo.FailureMode" uuid="7eedc3b4-1a59-47bf-a74b-553c670f3ab5">
+      <ID>5</ID>
+      <associatedFaults type="faultinfo.SSFault" uuid="e860f1af-d676-469f-9db4-c55588fea851"/>
+      <faultSubsystemName>Fault2</faultSubsystemName>
+      <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
+    </failureModes>
+    <failureModes type="faultinfo.FailureMode" uuid="3198c3cb-067e-4929-bbfb-d9e7549fa140">
+      <ID>6</ID>
+      <associatedFaults type="faultinfo.SSFault" uuid="89798eaf-c62f-4d16-9b3f-5cd1477e79af"/>
+      <faultSubsystemName>Fault3</faultSubsystemName>
+      <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
+    </failureModes>
+    <failureModes type="faultinfo.FailureMode" uuid="552185a3-784d-467f-a189-48dba33512ff">
+      <ID>7</ID>
+      <associatedFaults type="faultinfo.SSFault" uuid="eefc470f-36a4-4a49-83d9-59d8b5c6e844"/>
+      <faultSubsystemName>Fault4</faultSubsystemName>
+      <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
+    </failureModes>
+    <faultModelName>realtime_test_FaultModel</faultModelName>
+    <faultModelUUID>b81123a6-8d0d-4255-a053-6a741864cb55</faultModelUUID>
+  </faultinfo.FailureModeContainer>
+  <faultinfo.FaultContainerSet type="faultinfo.FaultContainerSet" uuid="6b31c047-430d-4591-8967-c9694834e159">
+    <conditionals type="faultinfo.conditional.Conditional" uuid="15c632dd-36b4-4465-819b-cd3154765e18">
+      <checksum>4c204ff6-a28e-4cf9-a480-f33a474e323b</checksum>
+      <condition>x &gt; 0</condition>
+      <conditionalTriggers type="faultinfo.ConditionalTrigger" uuid="2aac838f-c4e6-42bd-a125-2dadee68ac63"/>
+      <mustBeLogged>false</mustBeLogged>
+      <name>Cond1</name>
+      <resyncRefBlkID></resyncRefBlkID>
+      <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
+      <symbols type="faultinfo.conditional.ModelElementSymbol" uuid="e3231628-a964-4b9d-99ce-395fd7958626">
+        <modelElementID>Outport|realtime_test:1|realtime_test_reference:29|1</modelElementID>
+        <modelElementName>realtime_test/Model/In1/Outport/1</modelElementName>
+        <name>x</name>
+      </symbols>
+    </conditionals>
+    <conditionals type="faultinfo.conditional.Conditional" uuid="5001b762-a20e-4ad2-bfc7-6bbf72824049">
+      <checksum>3b023efa-608d-477e-9fdb-66415fa96c3f</checksum>
+      <condition>y &gt; 0</condition>
+      <conditionalTriggers type="faultinfo.ConditionalTrigger" uuid="7683377c-ef55-4a05-9dbd-0fa167a0b932"/>
+      <mustBeLogged>false</mustBeLogged>
+      <name>Cond2</name>
+      <resyncRefBlkID></resyncRefBlkID>
+      <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
+      <symbols type="faultinfo.conditional.ModelElementSymbol" uuid="723dec56-7d7f-4534-97b1-3b37e7b2d89d">
+        <modelElementID>Outport|realtime_test:1|realtime_test_reference:31|1</modelElementID>
+        <modelElementName>realtime_test/Model/In2/Outport/1</modelElementName>
+        <name>y</name>
+      </symbols>
+    </conditionals>
+    <conditionals type="faultinfo.conditional.Conditional" uuid="d8d42957-cec2-42da-a5fc-20cc46c15947">
+      <checksum>22ccd0ec-a339-457d-8461-26dfec3fe9dd</checksum>
+      <condition>z &gt; 0</condition>
+      <conditionalTriggers type="faultinfo.ConditionalTrigger" uuid="d90bd250-97be-4880-b9e6-d310eba7d1f4"/>
+      <mustBeLogged>false</mustBeLogged>
+      <name>Cond3</name>
+      <resyncRefBlkID></resyncRefBlkID>
+      <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
+      <symbols type="faultinfo.conditional.ModelElementSymbol" uuid="05856972-a2c8-4a2e-b65d-269ba00b2730">
+        <modelElementID>Outport|realtime_test:1|realtime_test_reference:35|1</modelElementID>
+        <modelElementName>realtime_test/Model/In3/Outport/1</modelElementName>
+        <name>z</name>
+      </symbols>
+    </conditionals>
+    <conditionals type="faultinfo.conditional.Conditional" uuid="9f73df0d-c630-455c-833d-ae0ff2a0e3ae">
+      <checksum>4f3f9d93-c128-40b4-8750-13240e6cd11e</checksum>
+      <condition>w</condition>
+      <conditionalTriggers type="faultinfo.ConditionalTrigger" uuid="65c78c6e-37e5-4cb4-b03b-ad778aceaa48"/>
+      <mustBeLogged>false</mustBeLogged>
+      <name>Cond4</name>
+      <resyncRefBlkID></resyncRefBlkID>
+      <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
+      <symbols type="faultinfo.conditional.ModelElementSymbol" uuid="fccdd9a5-30c5-4fff-a750-969630608e82">
+        <modelElementID>Outport|realtime_test:1|realtime_test_reference:36|1</modelElementID>
+        <modelElementName>realtime_test/Model/In4/Outport/1</modelElementName>
+        <name>w</name>
+      </symbols>
+    </conditionals>
+    <faultContainers type="faultinfo.FaultContainer" uuid="30a349d5-894f-4ef0-8f89-66ba685a9174">
+      <activeFault type="faultinfo.SSFault" uuid="523cc183-451b-4f33-b957-2cd6a3b09a8a"/>
+      <faultedEntityID>SSSubelement|realtime_test:1|realtime_test_reference:18|Section interface</faultedEntityID>
+      <faultedEntityName>realtime_test/Model/Transmission Line (Three-Phase)/Section interface</faultedEntityName>
+      <faults type="faultinfo.SSFault" uuid="523cc183-451b-4f33-b957-2cd6a3b09a8a">
+        <checksum>daee95fb-0baa-456e-a69d-e2e654d64514</checksum>
+        <faultDescription></faultDescription>
+        <faultName>Fault1</faultName>
+        <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
+        <triggerOn type="faultinfo.ConditionalTrigger" uuid="2aac838f-c4e6-42bd-a125-2dadee68ac63">
+          <isPersistent>false</isPersistent>
+        </triggerOn>
+      </faults>
+      <isEnabled>true</isEnabled>
+    </faultContainers>
+    <faultContainers type="faultinfo.FaultContainer" uuid="34d6fb7f-5b83-4adb-9385-9202bedc4a7c">
+      <activeFault type="faultinfo.SSFault" uuid="e860f1af-d676-469f-9db4-c55588fea851"/>
+      <faultedEntityID>SSSubelement|realtime_test:1|realtime_test_reference:19|Section interface</faultedEntityID>
+      <faultedEntityName>realtime_test/Model/Transmission Line (Three-Phase)1/Section interface</faultedEntityName>
+      <faults type="faultinfo.SSFault" uuid="e860f1af-d676-469f-9db4-c55588fea851">
+        <checksum>4a1dee81-a90c-4dd9-b2a8-f2d5933f8fe4</checksum>
+        <faultDescription></faultDescription>
+        <faultName>Fault2</faultName>
+        <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
+        <triggerOn type="faultinfo.ConditionalTrigger" uuid="7683377c-ef55-4a05-9dbd-0fa167a0b932">
+          <isPersistent>false</isPersistent>
+        </triggerOn>
+      </faults>
+      <isEnabled>true</isEnabled>
+    </faultContainers>
+    <faultContainers type="faultinfo.FaultContainer" uuid="8b6dd646-ff6d-4301-afc6-1e5fbaf6a19f">
+      <activeFault type="faultinfo.SSFault" uuid="89798eaf-c62f-4d16-9b3f-5cd1477e79af"/>
+      <faultedEntityID>SSSubelement|realtime_test:1|realtime_test_reference:20|Section interface</faultedEntityID>
+      <faultedEntityName>realtime_test/Model/Transmission Line (Three-Phase)2/Section interface</faultedEntityName>
+      <faults type="faultinfo.SSFault" uuid="89798eaf-c62f-4d16-9b3f-5cd1477e79af">
+        <checksum>72e06ad4-b429-411c-9105-ea59d355f7d9</checksum>
+        <faultDescription></faultDescription>
+        <faultName>Fault3</faultName>
+        <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
+        <triggerOn type="faultinfo.ConditionalTrigger" uuid="d90bd250-97be-4880-b9e6-d310eba7d1f4">
+          <isPersistent>false</isPersistent>
+        </triggerOn>
+      </faults>
+      <isEnabled>true</isEnabled>
+    </faultContainers>
+    <faultContainers type="faultinfo.FaultContainer" uuid="bf14bdd6-4fa4-4946-b03f-c25248c29085">
+      <activeFault type="faultinfo.SSFault" uuid="eefc470f-36a4-4a49-83d9-59d8b5c6e844"/>
+      <faultedEntityID>SSSubelement|realtime_test:1|realtime_test_reference:21|Section interface</faultedEntityID>
+      <faultedEntityName>realtime_test/Model/Transmission Line (Three-Phase)3/Section interface</faultedEntityName>
+      <faults type="faultinfo.SSFault" uuid="eefc470f-36a4-4a49-83d9-59d8b5c6e844">
+        <checksum>1b5cf07c-1987-4c8b-b99a-e15d3aba95cd</checksum>
+        <faultDescription></faultDescription>
+        <faultName>Fault4</faultName>
+        <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
+        <triggerOn type="faultinfo.ConditionalTrigger" uuid="65c78c6e-37e5-4cb4-b03b-ad778aceaa48">
+          <isPersistent>false</isPersistent>
+        </triggerOn>
+      </faults>
+      <isEnabled>true</isEnabled>
+    </faultContainers>
+    <isEnabled>true</isEnabled>
+    <lastUpdatedAt>2026-03-19T10:11:26</lastUpdatedAt>
+    <modelName>realtime_test</modelName>
+    <modelUUID>6b27c5b0-3585-457f-b4f4-260159cd54ea</modelUUID>
+  </faultinfo.FaultContainerSet>
+</MF0>
