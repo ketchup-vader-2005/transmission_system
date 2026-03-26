@@ -29,44 +29,44 @@ classdef UnsqueezeLayer1000 < nnet.layer.Layer & nnet.layer.Formattable
         function this = UnsqueezeLayer1000(name)
             this.Name = name;
             this.NumInputs = 2;
-            this.OutputNames = {'functional_58_1_c_2'};
+            this.OutputNames = {'functional_1_conv_2'};
         end
 
-        function [functional_58_1_c_2] = predict(this, feature_input, feature_inputNumDims)
+        function [functional_1_conv_2] = predict(this, feature_input, feature_inputNumDims)
             if isdlarray(feature_input)
                 feature_input = stripdims(feature_input);
             end
             feature_inputNumDims = numel(feature_inputNumDims);
             feature_input = test_model.ops.permuteInputVar(feature_input, ['as-is'], 3);
 
-            [functional_58_1_c_2, functional_58_1_c_2NumDims] = UnsqueezeGraph1000(this, feature_input, feature_inputNumDims, false);
-            functional_58_1_c_2 = test_model.ops.permuteOutputVar(functional_58_1_c_2, [2 3 4 1], 4);
+            [functional_1_conv_2, functional_1_conv_2NumDims] = UnsqueezeGraph1000(this, feature_input, feature_inputNumDims, false);
+            functional_1_conv_2 = test_model.ops.permuteOutputVar(functional_1_conv_2, [2 3 4 1], 4);
 
-            functional_58_1_c_2 = dlarray(single(functional_58_1_c_2), 'SSCB');
+            functional_1_conv_2 = dlarray(single(functional_1_conv_2), 'SSCB');
         end
 
-        function [functional_58_1_c_2] = forward(this, feature_input, feature_inputNumDims)
+        function [functional_1_conv_2] = forward(this, feature_input, feature_inputNumDims)
             if isdlarray(feature_input)
                 feature_input = stripdims(feature_input);
             end
             feature_inputNumDims = numel(feature_inputNumDims);
             feature_input = test_model.ops.permuteInputVar(feature_input, ['as-is'], 3);
 
-            [functional_58_1_c_2, functional_58_1_c_2NumDims] = UnsqueezeGraph1000(this, feature_input, feature_inputNumDims, true);
-            functional_58_1_c_2 = test_model.ops.permuteOutputVar(functional_58_1_c_2, [2 3 4 1], 4);
+            [functional_1_conv_2, functional_1_conv_2NumDims] = UnsqueezeGraph1000(this, feature_input, feature_inputNumDims, true);
+            functional_1_conv_2 = test_model.ops.permuteOutputVar(functional_1_conv_2, [2 3 4 1], 4);
 
-            functional_58_1_c_2 = dlarray(single(functional_58_1_c_2), 'SSCB');
+            functional_1_conv_2 = dlarray(single(functional_1_conv_2), 'SSCB');
         end
 
-        function [functional_58_1_c_2, functional_58_1_c_2NumDims1001] = UnsqueezeGraph1000(this, feature_input, feature_inputNumDims, Training)
+        function [functional_1_conv_2, functional_1_conv_2NumDims1001] = UnsqueezeGraph1000(this, feature_input, feature_inputNumDims, Training)
 
             % Execute the operators:
             % Unsqueeze:
-            [shape, functional_58_1_c_2NumDims] = test_model.ops.prepareUnsqueezeArgs(feature_input, this.Vars.const_fold_opt__62, feature_inputNumDims);
-            functional_58_1_c_2 = reshape(feature_input, shape);
+            [shape, functional_1_conv_2NumDims] = test_model.ops.prepareUnsqueezeArgs(feature_input, this.Vars.const_fold_opt__113, feature_inputNumDims);
+            functional_1_conv_2 = reshape(feature_input, shape);
 
             % Set graph output arguments
-            functional_58_1_c_2NumDims1001 = functional_58_1_c_2NumDims;
+            functional_1_conv_2NumDims1001 = functional_1_conv_2NumDims;
 
         end
 

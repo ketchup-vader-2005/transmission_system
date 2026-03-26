@@ -1,3 +1,4 @@
+trigger_samples = 80;
 interface1 = 50;
 interface2 = 50;
 interface3 = 50;
@@ -10,8 +11,8 @@ powersysModel = "training_data_switching";
 referenceModel = "training_data_switching_refernce";
 
 Interface = [30, 60, 90];
+Load = [0.8*1e3, 1e3, 1.2*1e3];
 NR_values = [1e-3, 0.032, 0.422];
-Triggers = [80, 160, 293];
 
 open_system(powersysModel)
 
@@ -28,15 +29,22 @@ myfaults = myfaults(sortIdx);
 for f = 23:33
     Simulink.fault.enable(powersysModel+"/Model/Transmission Line (Three-Phase)2/Section interface", true);
     Fault = sprintf('Fault%d', f);
-    for NR = NR_values
-        for trigger_samples = Triggers
+    for load_p = Load
+        for NR = NR_values
             for interface3 = Interface
                 activate(myfaults(f));
                 out = sim(powersysModel);
                 Vabc = squeeze(out.logsout.get('Vabc').Values.Data);
                 Iabc = squeeze(out.logsout.get('Iabc').Values.Data);
-                VI = [Vabc; Iabc];
-                T_transient = array2table(VI', 'VariableNames', {'Va', 'Vb', 'Vc', 'Ia', 'Ib', 'Ic'});
+                a = Iabc(1,:);
+                b = Iabc(2,:);
+                c = Iabc(3,:);
+                Ig = a + b + c;
+                d1 = modwt(a, 'db4');
+                d2 = modwt(b, 'db4');
+                d3 = modwt(c, 'db4');
+                VI = [Vabc; Iabc; Ig; d1(1,:); d2(1,:); d3(1,:)];
+                T_transient = array2table(VI', 'VariableNames', {'Va', 'Vb', 'Vc', 'Ia', 'Ib', 'Ic', 'Ig', 'D1[a]', 'D1[b]', 'D1[c]'});
                 % 2. Create the "Summary Row" for this 
                 % We wrap T_transient in { } to tell M
                 T_mini = table({T_transient}, 'VariableNames', {'TransientData'});
