@@ -44,8 +44,8 @@
       </symbols>
     </conditionals>
     <conditionals type="faultinfo.conditional.Conditional" uuid="9f73df0d-c630-455c-833d-ae0ff2a0e3ae">
-      <checksum>4f3f9d93-c128-40b4-8750-13240e6cd11e</checksum>
-      <condition>w</condition>
+      <checksum>e92f115a-3af0-4853-b4b6-a755e68cf9f4</checksum>
+      <condition>w&gt;0</condition>
       <conditionalTriggers type="faultinfo.ConditionalTrigger" uuid="65c78c6e-37e5-4cb4-b03b-ad778aceaa48"/>
       <mustBeLogged>false</mustBeLogged>
       <name>Cond4</name>
@@ -107,7 +107,7 @@
       <faultedEntityID>SSSubelement|realtime_test:1|realtime_test_reference:21|Section interface</faultedEntityID>
       <faultedEntityName>realtime_test/Model/Transmission Line (Three-Phase)3/Section interface</faultedEntityName>
       <faults type="faultinfo.SSFault" uuid="eefc470f-36a4-4a49-83d9-59d8b5c6e844">
-        <checksum>1b5cf07c-1987-4c8b-b99a-e15d3aba95cd</checksum>
+        <checksum>4670ddb3-00a4-4182-8f41-6cf1f9bd8c19</checksum>
         <faultDescription></faultDescription>
         <faultName>Fault4</faultName>
         <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
@@ -118,7 +118,7 @@
       <isEnabled>true</isEnabled>
     </faultContainers>
     <isEnabled>true</isEnabled>
-    <lastUpdatedAt>2026-03-26T13:04:40</lastUpdatedAt>
+    <lastUpdatedAt>2026-03-28T15:19:01</lastUpdatedAt>
     <modelName>realtime_test</modelName>
     <modelUUID>6b27c5b0-3585-457f-b4f4-260159cd54ea</modelUUID>
   </faultinfo.FaultContainerSet>

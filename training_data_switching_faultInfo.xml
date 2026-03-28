@@ -988,10 +988,10 @@
           <isPersistent>false</isPersistent>
         </triggerOn>
       </faults>
-      <isEnabled>false</isEnabled>
+      <isEnabled>true</isEnabled>
     </faultContainers>
     <faultContainers type="faultinfo.FaultContainer" uuid="dd634ef2-0c84-4afe-8488-17ddacc0a139">
-      <activeFault type="faultinfo.SSFault" uuid="2865e192-bc4b-4acd-94ed-3dacbe7a19a2"/>
+      <activeFault type="faultinfo.SSFault" uuid="2878f3ac-fd34-440c-805b-b01880ce2f22"/>
       <faultedEntityID>SSSubelement|training_data_switching:1|training_data_switching_reference:19|Section interface</faultedEntityID>
       <faultedEntityName>training_data_switching/Model/Transmission Line (Three-Phase)1/Section interface</faultedEntityName>
       <faults type="faultinfo.SSFault" uuid="2865e192-bc4b-4acd-94ed-3dacbe7a19a2">
@@ -1201,7 +1201,7 @@
       <isEnabled>false</isEnabled>
     </faultContainers>
     <faultContainers type="faultinfo.FaultContainer" uuid="3707c6fe-96b7-4f7e-b14e-06ea944a2450">
-      <activeFault type="faultinfo.SSFault" uuid="905c05b1-17fe-4f48-8fca-257cf674a0c7"/>
+      <activeFault type="faultinfo.SSFault" uuid="ecbfa7f4-0976-4d50-b4fb-7a53907a77da"/>
       <faultedEntityID>SSSubelement|training_data_switching:1|training_data_switching_reference:21|Section interface</faultedEntityID>
       <faultedEntityName>training_data_switching/Model/Transmission Line (Three-Phase)3/Section interface</faultedEntityName>
       <faults type="faultinfo.SSFault" uuid="905c05b1-17fe-4f48-8fca-257cf674a0c7">
@@ -1306,7 +1306,7 @@
       <isEnabled>false</isEnabled>
     </faultContainers>
     <isEnabled>true</isEnabled>
-    <lastUpdatedAt>2026-03-26T13:53:21</lastUpdatedAt>
+    <lastUpdatedAt>2026-03-27T10:58:04</lastUpdatedAt>
     <modelName>training_data_switching</modelName>
     <modelUUID>f1627631-671f-49e6-8f9f-fb58b6359777</modelUUID>
   </faultinfo.FaultContainerSet>

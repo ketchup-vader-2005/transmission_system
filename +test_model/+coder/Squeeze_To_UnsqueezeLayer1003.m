@@ -53,7 +53,7 @@ classdef Squeeze_To_UnsqueezeLayer1003 < nnet.layer.Layer & nnet.layer.Formattab
     methods
         function this = Squeeze_To_UnsqueezeLayer1003(mlInstance)
             this.Name = mlInstance.Name;
-            this.OutputNames = {'functional_1_max__4'};
+            this.OutputNames = {'functional_1_conv_19'};
             if isstruct(mlInstance.Vars)
                 names = fieldnames(mlInstance.Vars);
                 for i=1:numel(names)
@@ -67,7 +67,7 @@ classdef Squeeze_To_UnsqueezeLayer1003 < nnet.layer.Layer & nnet.layer.Formattab
             this.NumDims = mlInstance.NumDims;
         end
 
-        function [functional_1_max__4] = predict(this, functional_1_conv_16__)
+        function [functional_1_conv_19] = predict(this, functional_1_conv_16__)
             if isdlarray(functional_1_conv_16__)
                 functional_1_conv_16_ = stripdims(functional_1_conv_16__);
             else
@@ -76,21 +76,21 @@ classdef Squeeze_To_UnsqueezeLayer1003 < nnet.layer.Layer & nnet.layer.Formattab
             functional_1_conv_16NumDims = 4;
             functional_1_conv_16 = test_model.coder.ops.permuteInputVar(functional_1_conv_16_, [4 3 1 2], 4);
 
-            [functional_1_max__4__, functional_1_max__4NumDims__] = Squeeze_To_UnsqueezeGraph1006(this, functional_1_conv_16, functional_1_conv_16NumDims, false);
-            functional_1_max__4_ = test_model.coder.ops.permuteOutputVar(functional_1_max__4__, [3 4 2 1], 4);
+            [functional_1_conv_19__, functional_1_conv_19NumDims__] = Squeeze_To_UnsqueezeGraph1006(this, functional_1_conv_16, functional_1_conv_16NumDims, false);
+            functional_1_conv_19_ = test_model.coder.ops.permuteOutputVar(functional_1_conv_19__, [3 4 2 1], 4);
 
-            functional_1_max__4 = dlarray(single(functional_1_max__4_), 'SSCB');
+            functional_1_conv_19 = dlarray(single(functional_1_conv_19_), 'SSCB');
         end
 
-        function [functional_1_max__4, functional_1_max__4NumDims1007] = Squeeze_To_UnsqueezeGraph1006(this, functional_1_conv_16, functional_1_conv_16NumDims, Training)
+        function [functional_1_conv_19, functional_1_conv_19NumDims1007] = Squeeze_To_UnsqueezeGraph1006(this, functional_1_conv_16, functional_1_conv_16NumDims, Training)
 
             % Execute the operators:
             % Squeeze:
-            [functional_1_conv_15, functional_1_conv_15NumDims] = test_model.coder.ops.onnxSqueeze(functional_1_conv_16, this.Vars.const_fold_opt__122_, coder.const(functional_1_conv_16NumDims));
+            [functional_1_conv_15, functional_1_conv_15NumDims] = test_model.coder.ops.onnxSqueeze(functional_1_conv_16, this.Vars.const_fold_opt__24_1, coder.const(functional_1_conv_16NumDims));
 
             % Add:
-            functional_1_conv_12 = functional_1_conv_15 + this.Vars.const_fold_opt__128;
-            functional_1_conv_12NumDims = max(coder.const(functional_1_conv_15NumDims), this.NumDims.const_fold_opt__128);
+            functional_1_conv_12 = functional_1_conv_15 + this.Vars.const_fold_opt__2404;
+            functional_1_conv_12NumDims = max(coder.const(functional_1_conv_15NumDims), this.NumDims.const_fold_opt__2404);
 
             % Relu:
             X1007 = dlarray(test_model.coder.ops.extractIfDlarray(functional_1_conv_12));
@@ -99,11 +99,11 @@ classdef Squeeze_To_UnsqueezeLayer1003 < nnet.layer.Layer & nnet.layer.Formattab
             functional_1_conv_13NumDims = coder.const(functional_1_conv_12NumDims);
 
             % Unsqueeze:
-            [shape1009, functional_1_max__4NumDims] = test_model.coder.ops.prepareUnsqueezeArgs(functional_1_conv_13, this.Vars.const_fold_opt__122_, coder.const(functional_1_conv_13NumDims));
-            functional_1_max__4 = reshape(functional_1_conv_13, shape1009);
+            [shape1009, functional_1_conv_19NumDims] = test_model.coder.ops.prepareUnsqueezeArgs(functional_1_conv_13, this.Vars.const_fold_opt__24_1, coder.const(functional_1_conv_13NumDims));
+            functional_1_conv_19 = reshape(functional_1_conv_13, shape1009);
 
             % Set graph output arguments
-            functional_1_max__4NumDims1007 = functional_1_max__4NumDims;
+            functional_1_conv_19NumDims1007 = functional_1_conv_19NumDims;
 
         end
 
