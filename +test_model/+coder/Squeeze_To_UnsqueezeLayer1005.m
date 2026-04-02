@@ -53,7 +53,7 @@ classdef Squeeze_To_UnsqueezeLayer1005 < nnet.layer.Layer & nnet.layer.Formattab
     methods
         function this = Squeeze_To_UnsqueezeLayer1005(mlInstance)
             this.Name = mlInstance.Name;
-            this.OutputNames = {'functional_3_1_co_29'};
+            this.OutputNames = {'functional_5_1_co_29'};
             if isstruct(mlInstance.Vars)
                 names = fieldnames(mlInstance.Vars);
                 for i=1:numel(names)
@@ -67,43 +67,43 @@ classdef Squeeze_To_UnsqueezeLayer1005 < nnet.layer.Layer & nnet.layer.Formattab
             this.NumDims = mlInstance.NumDims;
         end
 
-        function [functional_3_1_co_29] = predict(this, functional_3_1_co_26__)
-            if isdlarray(functional_3_1_co_26__)
-                functional_3_1_co_26_ = stripdims(functional_3_1_co_26__);
+        function [functional_5_1_co_29] = predict(this, functional_5_1_co_26__)
+            if isdlarray(functional_5_1_co_26__)
+                functional_5_1_co_26_ = stripdims(functional_5_1_co_26__);
             else
-                functional_3_1_co_26_ = functional_3_1_co_26__;
+                functional_5_1_co_26_ = functional_5_1_co_26__;
             end
-            functional_3_1_co_26NumDims = 4;
-            functional_3_1_co_26 = test_model.coder.ops.permuteInputVar(functional_3_1_co_26_, [4 3 1 2], 4);
+            functional_5_1_co_26NumDims = 4;
+            functional_5_1_co_26 = test_model.coder.ops.permuteInputVar(functional_5_1_co_26_, [4 3 1 2], 4);
 
-            [functional_3_1_co_29__, functional_3_1_co_29NumDims__] = Squeeze_To_UnsqueezeGraph1010(this, functional_3_1_co_26, functional_3_1_co_26NumDims, false);
-            functional_3_1_co_29_ = test_model.coder.ops.permuteOutputVar(functional_3_1_co_29__, [3 4 2 1], 4);
+            [functional_5_1_co_29__, functional_5_1_co_29NumDims__] = Squeeze_To_UnsqueezeGraph1010(this, functional_5_1_co_26, functional_5_1_co_26NumDims, false);
+            functional_5_1_co_29_ = test_model.coder.ops.permuteOutputVar(functional_5_1_co_29__, [3 4 2 1], 4);
 
-            functional_3_1_co_29 = dlarray(single(functional_3_1_co_29_), 'SSCB');
+            functional_5_1_co_29 = dlarray(single(functional_5_1_co_29_), 'SSCB');
         end
 
-        function [functional_3_1_co_29, functional_3_1_co_29NumDims1011] = Squeeze_To_UnsqueezeGraph1010(this, functional_3_1_co_26, functional_3_1_co_26NumDims, Training)
+        function [functional_5_1_co_29, functional_5_1_co_29NumDims1011] = Squeeze_To_UnsqueezeGraph1010(this, functional_5_1_co_26, functional_5_1_co_26NumDims, Training)
 
             % Execute the operators:
             % Squeeze:
-            [functional_3_1_co_25, functional_3_1_co_25NumDims] = test_model.coder.ops.onnxSqueeze(functional_3_1_co_26, this.Vars.const_fold_opt__2711, coder.const(functional_3_1_co_26NumDims));
+            [functional_5_1_co_25, functional_5_1_co_25NumDims] = test_model.coder.ops.onnxSqueeze(functional_5_1_co_26, this.Vars.const_fold_opt__341_, coder.const(functional_5_1_co_26NumDims));
 
             % Add:
-            functional_3_1_co_22 = functional_3_1_co_25 + this.Vars.const_fold_opt__2712;
-            functional_3_1_co_22NumDims = max(coder.const(functional_3_1_co_25NumDims), this.NumDims.const_fold_opt__2712);
+            functional_5_1_co_22 = functional_5_1_co_25 + this.Vars.const_fold_opt__350;
+            functional_5_1_co_22NumDims = max(coder.const(functional_5_1_co_25NumDims), this.NumDims.const_fold_opt__350);
 
             % Relu:
-            X1020 = dlarray(test_model.coder.ops.extractIfDlarray(functional_3_1_co_22));
+            X1020 = dlarray(test_model.coder.ops.extractIfDlarray(functional_5_1_co_22));
             Y1021 = relu(X1020);
-            functional_3_1_co_23 = test_model.coder.ops.extractIfDlarray(Y1021);
-            functional_3_1_co_23NumDims = coder.const(functional_3_1_co_22NumDims);
+            functional_5_1_co_23 = test_model.coder.ops.extractIfDlarray(Y1021);
+            functional_5_1_co_23NumDims = coder.const(functional_5_1_co_22NumDims);
 
             % Unsqueeze:
-            [shape1022, functional_3_1_co_29NumDims] = test_model.coder.ops.prepareUnsqueezeArgs(functional_3_1_co_23, this.Vars.const_fold_opt__2711, coder.const(functional_3_1_co_23NumDims));
-            functional_3_1_co_29 = reshape(functional_3_1_co_23, shape1022);
+            [shape1022, functional_5_1_co_29NumDims] = test_model.coder.ops.prepareUnsqueezeArgs(functional_5_1_co_23, this.Vars.const_fold_opt__341_, coder.const(functional_5_1_co_23NumDims));
+            functional_5_1_co_29 = reshape(functional_5_1_co_23, shape1022);
 
             % Set graph output arguments
-            functional_3_1_co_29NumDims1011 = functional_3_1_co_29NumDims;
+            functional_5_1_co_29NumDims1011 = functional_5_1_co_29NumDims;
 
         end
 

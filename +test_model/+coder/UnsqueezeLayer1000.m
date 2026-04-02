@@ -54,7 +54,7 @@ classdef UnsqueezeLayer1000 < nnet.layer.Layer & nnet.layer.Formattable
         function this = UnsqueezeLayer1000(mlInstance)
             this.Name = mlInstance.Name;
             this.NumInputs = 2;
-            this.OutputNames = {'functional_3_1_co_2'};
+            this.OutputNames = {'functional_1_conv_2'};
             if isstruct(mlInstance.Vars)
                 names = fieldnames(mlInstance.Vars);
                 for i=1:numel(names)
@@ -68,7 +68,7 @@ classdef UnsqueezeLayer1000 < nnet.layer.Layer & nnet.layer.Formattable
             this.NumDims = mlInstance.NumDims;
         end
 
-        function [functional_3_1_co_2] = predict(this, feature_input__, feature_inputNumDims__)
+        function [functional_1_conv_2] = predict(this, feature_input__, feature_inputNumDims__)
             if isdlarray(feature_input__)
                 feature_input_ = stripdims(feature_input__);
             else
@@ -77,21 +77,21 @@ classdef UnsqueezeLayer1000 < nnet.layer.Layer & nnet.layer.Formattable
             feature_inputNumDims = numel(feature_inputNumDims__);
             feature_input = test_model.coder.ops.permuteInputVar(feature_input_, ['as-is'], 3);
 
-            [functional_3_1_co_2__, functional_3_1_co_2NumDims__] = UnsqueezeGraph1000(this, feature_input, feature_inputNumDims, false);
-            functional_3_1_co_2_ = test_model.coder.ops.permuteOutputVar(functional_3_1_co_2__, [2 3 4 1], 4);
+            [functional_1_conv_2__, functional_1_conv_2NumDims__] = UnsqueezeGraph1000(this, feature_input, feature_inputNumDims, false);
+            functional_1_conv_2_ = test_model.coder.ops.permuteOutputVar(functional_1_conv_2__, [2 3 4 1], 4);
 
-            functional_3_1_co_2 = dlarray(single(functional_3_1_co_2_), 'SSCB');
+            functional_1_conv_2 = dlarray(single(functional_1_conv_2_), 'SSCB');
         end
 
-        function [functional_3_1_co_2, functional_3_1_co_2NumDims1001] = UnsqueezeGraph1000(this, feature_input, feature_inputNumDims, Training)
+        function [functional_1_conv_2, functional_1_conv_2NumDims1001] = UnsqueezeGraph1000(this, feature_input, feature_inputNumDims, Training)
 
             % Execute the operators:
             % Unsqueeze:
-            [shape1000, functional_3_1_co_2NumDims] = test_model.coder.ops.prepareUnsqueezeArgs(feature_input, this.Vars.const_fold_opt__2715, coder.const(feature_inputNumDims));
-            functional_3_1_co_2 = reshape(feature_input, shape1000);
+            [shape1000, functional_1_conv_2NumDims] = test_model.coder.ops.prepareUnsqueezeArgs(feature_input, this.Vars.const_fold_opt__1990, coder.const(feature_inputNumDims));
+            functional_1_conv_2 = reshape(feature_input, shape1000);
 
             % Set graph output arguments
-            functional_3_1_co_2NumDims1001 = functional_3_1_co_2NumDims;
+            functional_1_conv_2NumDims1001 = functional_1_conv_2NumDims;
 
         end
 

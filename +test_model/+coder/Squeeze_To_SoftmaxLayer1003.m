@@ -7,9 +7,11 @@ classdef Squeeze_To_SoftmaxLayer1003 < nnet.layer.Layer & nnet.layer.Formattable
     %#ok<*INUSL>
     %#ok<*VARARG>
     properties (Learnable)
-        functional_3_1_de_2
-        functional_3_1_de_7
-        functional_3_1_typ_2
+        functional_1_dens_16
+        functional_1_type__2
+        functional_1_dens_2
+        functional_1_dens_9
+        functional_1_dista_1
     end
 
     properties (State)
@@ -50,16 +52,20 @@ classdef Squeeze_To_SoftmaxLayer1003 < nnet.layer.Layer & nnet.layer.Formattable
                 this_ml.Vars = [];
             end
             this_ml.NumDims = cgInstance.NumDims;
-            this_ml.functional_3_1_de_2 = cgInstance.functional_3_1_de_2;
-            this_ml.functional_3_1_de_7 = cgInstance.functional_3_1_de_7;
-            this_ml.functional_3_1_typ_2 = cgInstance.functional_3_1_typ_2;
+            this_ml.functional_1_dens_16 = cgInstance.functional_1_dens_16;
+            this_ml.functional_1_type__2 = cgInstance.functional_1_type__2;
+            this_ml.functional_1_dens_2 = cgInstance.functional_1_dens_2;
+            this_ml.functional_1_dens_9 = cgInstance.functional_1_dens_9;
+            this_ml.functional_1_dista_1 = cgInstance.functional_1_dista_1;
         end
     end
 
     methods
         function this = Squeeze_To_SoftmaxLayer1003(mlInstance)
             this.Name = mlInstance.Name;
-            this.OutputNames = {'type'};
+            this.NumInputs = 3;
+            this.NumOutputs = 2;
+            this.OutputNames = {'type', 'distance'};
             if isstruct(mlInstance.Vars)
                 names = fieldnames(mlInstance.Vars);
                 for i=1:numel(names)
@@ -71,89 +77,117 @@ classdef Squeeze_To_SoftmaxLayer1003 < nnet.layer.Layer & nnet.layer.Formattable
             end
 
             this.NumDims = mlInstance.NumDims;
-            this.functional_3_1_de_2 = mlInstance.functional_3_1_de_2;
-            this.functional_3_1_de_7 = mlInstance.functional_3_1_de_7;
-            this.functional_3_1_typ_2 = mlInstance.functional_3_1_typ_2;
+            this.functional_1_dens_16 = mlInstance.functional_1_dens_16;
+            this.functional_1_type__2 = mlInstance.functional_1_type__2;
+            this.functional_1_dens_2 = mlInstance.functional_1_dens_2;
+            this.functional_1_dens_9 = mlInstance.functional_1_dens_9;
+            this.functional_1_dista_1 = mlInstance.functional_1_dista_1;
         end
 
-        function [type] = predict(this, functional_3_1_co_16__)
-            if isdlarray(functional_3_1_co_16__)
-                functional_3_1_co_16_ = stripdims(functional_3_1_co_16__);
+        function [type, distance] = predict(this, functional_1_conv_16__, functional_1_globa_3__, functional_1_globa_3NumDims__)
+            if isdlarray(functional_1_conv_16__)
+                functional_1_conv_16_ = stripdims(functional_1_conv_16__);
             else
-                functional_3_1_co_16_ = functional_3_1_co_16__;
+                functional_1_conv_16_ = functional_1_conv_16__;
             end
-            functional_3_1_co_16NumDims = 4;
-            functional_3_1_co_16 = test_model.coder.ops.permuteInputVar(functional_3_1_co_16_, [4 3 1 2], 4);
+            if isdlarray(functional_1_globa_3__)
+                functional_1_globa_3_ = stripdims(functional_1_globa_3__);
+            else
+                functional_1_globa_3_ = functional_1_globa_3__;
+            end
+            functional_1_conv_16NumDims = 4;
+            functional_1_globa_3NumDims = numel(functional_1_globa_3NumDims__);
+            functional_1_conv_16 = test_model.coder.ops.permuteInputVar(functional_1_conv_16_, [4 3 1 2], 4);
+            functional_1_globa_3 = test_model.coder.ops.permuteInputVar(functional_1_globa_3_, ['as-is'], 0);
 
-            [type__, typeNumDims__] = Squeeze_To_SoftmaxGraph1006(this, functional_3_1_co_16, functional_3_1_co_16NumDims, false);
+            [type__, distance__, typeNumDims__, distanceNumDims__] = Squeeze_To_SoftmaxGraph1007(this, functional_1_conv_16, functional_1_globa_3, functional_1_conv_16NumDims, functional_1_globa_3NumDims, false);
             type_ = test_model.coder.ops.permuteOutputVar(type__, ['as-is'], 2);
+            distance_ = test_model.coder.ops.permuteOutputVar(distance__, ['as-is'], 2);
 
             type = dlarray(single(type_), repmat('U', 1, max(2, coder.const(typeNumDims__))));
+            distance = dlarray(single(distance_), repmat('U', 1, max(2, coder.const(distanceNumDims__))));
         end
 
-        function [type, typeNumDims1007] = Squeeze_To_SoftmaxGraph1006(this, functional_3_1_co_16, functional_3_1_co_16NumDims, Training)
+        function [type, distance, typeNumDims1008, distanceNumDims1009] = Squeeze_To_SoftmaxGraph1007(this, functional_1_conv_16, functional_1_globa_3, functional_1_conv_16NumDims, functional_1_globa_3NumDims, Training)
 
             % Execute the operators:
             % Squeeze:
-            [functional_3_1_co_15, functional_3_1_co_15NumDims] = test_model.coder.ops.onnxSqueeze(functional_3_1_co_16, this.Vars.const_fold_opt__2711, coder.const(functional_3_1_co_16NumDims));
+            [functional_1_conv_15, functional_1_conv_15NumDims] = test_model.coder.ops.onnxSqueeze(functional_1_conv_16, this.Vars.const_axes__796, coder.const(functional_1_conv_16NumDims));
 
             % Add:
-            functional_3_1_co_12 = functional_3_1_co_15 + this.Vars.const_fold_opt__2704;
-            functional_3_1_co_12NumDims = max(coder.const(functional_3_1_co_15NumDims), this.NumDims.const_fold_opt__2704);
+            functional_1_conv_12 = functional_1_conv_15 + this.Vars.const_fold_opt__788;
+            functional_1_conv_12NumDims = max(coder.const(functional_1_conv_15NumDims), this.NumDims.const_fold_opt__788);
 
-            % Relu:
-            X1007 = dlarray(test_model.coder.ops.extractIfDlarray(functional_3_1_co_12));
-            Y1008 = relu(X1007);
-            functional_3_1_co_13 = test_model.coder.ops.extractIfDlarray(Y1008);
-            functional_3_1_co_13NumDims = coder.const(functional_3_1_co_12NumDims);
+            % LeakyRelu:
+            functional_1_conv_13 = leakyrelu(dlarray(functional_1_conv_12), 0.200000);
+            functional_1_conv_13NumDims = coder.const(functional_1_conv_12NumDims);
 
             % GlobalAveragePool:
-            [poolsize1009, dataFormat1010, functional_3_1_globaNumDims] = test_model.coder.ops.prepareGlobalAveragePoolArgs(functional_3_1_co_13, coder.const(functional_3_1_co_13NumDims));
-            X1011 = dlarray(single(test_model.coder.ops.extractIfDlarray(functional_3_1_co_13)));
-            Y1012 = avgpool(X1011, poolsize1009, 'DataFormat', dataFormat1010);
-            functional_3_1_globa = test_model.coder.ops.extractIfDlarray(Y1012);
+            [poolsize1007, dataFormat1008, functional_1_global_NumDims] = test_model.coder.ops.prepareGlobalAveragePoolArgs(functional_1_conv_13, coder.const(functional_1_conv_13NumDims));
+            X1009 = dlarray(single(test_model.coder.ops.extractIfDlarray(functional_1_conv_13)));
+            Y1010 = avgpool(X1009, poolsize1007, 'DataFormat', dataFormat1008);
+            functional_1_global_ = test_model.coder.ops.extractIfDlarray(Y1010);
 
             % Squeeze:
-            [functional_3_1_glo_1, functional_3_1_glo_1NumDims] = test_model.coder.ops.onnxSqueeze(functional_3_1_globa, this.Vars.const_fold_opt__2711, coder.const(functional_3_1_globaNumDims));
+            [functional_1_globa_1, functional_1_globa_1NumDims] = test_model.coder.ops.onnxSqueeze(functional_1_global_, this.Vars.const_axes__796, coder.const(functional_1_global_NumDims));
 
             % MatMul:
-            [functional_3_1_de_3, functional_3_1_de_3NumDims] = test_model.coder.ops.onnxMatMul(functional_3_1_glo_1, this.functional_3_1_de_2, coder.const(functional_3_1_glo_1NumDims), this.NumDims.functional_3_1_de_2);
+            [functional_1_dens_18, functional_1_dens_18NumDims] = test_model.coder.ops.onnxMatMul(functional_1_globa_1, this.functional_1_dens_16, coder.const(functional_1_globa_1NumDims), this.NumDims.functional_1_dens_16);
 
             % Add:
-            functional_3_1_de_1 = functional_3_1_de_3 + this.Vars.functional_3_1_dense;
-            functional_3_1_de_1NumDims = max(coder.const(functional_3_1_de_3NumDims), this.NumDims.functional_3_1_dense);
+            functional_1_dens_15 = functional_1_dens_18 + this.Vars.functional_1_dense_3;
+            functional_1_dens_15NumDims = max(coder.const(functional_1_dens_18NumDims), this.NumDims.functional_1_dense_3);
 
-            % Relu:
-            X1013 = dlarray(test_model.coder.ops.extractIfDlarray(functional_3_1_de_1));
-            Y1014 = relu(X1013);
-            functional_3_1_de_4 = test_model.coder.ops.extractIfDlarray(Y1014);
-            functional_3_1_de_4NumDims = coder.const(functional_3_1_de_1NumDims);
+            % LeakyRelu:
+            functional_1_dens_17 = leakyrelu(dlarray(functional_1_dens_15), 0.200000);
+            functional_1_dens_17NumDims = coder.const(functional_1_dens_15NumDims);
 
             % MatMul:
-            [functional_3_1_de_8, functional_3_1_de_8NumDims] = test_model.coder.ops.onnxMatMul(functional_3_1_de_4, this.functional_3_1_de_7, coder.const(functional_3_1_de_4NumDims), this.NumDims.functional_3_1_de_7);
+            [functional_1_type__3, functional_1_type__3NumDims] = test_model.coder.ops.onnxMatMul(functional_1_dens_17, this.functional_1_type__2, coder.const(functional_1_dens_17NumDims), this.NumDims.functional_1_type__2);
 
             % Add:
-            functional_3_1_de_6 = functional_3_1_de_8 + this.Vars.functional_3_1_de_5;
-            functional_3_1_de_6NumDims = max(coder.const(functional_3_1_de_8NumDims), this.NumDims.functional_3_1_de_5);
-
-            % Relu:
-            X1015 = dlarray(test_model.coder.ops.extractIfDlarray(functional_3_1_de_6));
-            Y1016 = relu(X1015);
-            functional_3_1_de_9 = test_model.coder.ops.extractIfDlarray(Y1016);
-            functional_3_1_de_9NumDims = coder.const(functional_3_1_de_6NumDims);
-
-            % MatMul:
-            [functional_3_1_typ_3, functional_3_1_typ_3NumDims] = test_model.coder.ops.onnxMatMul(functional_3_1_de_9, this.functional_3_1_typ_2, coder.const(functional_3_1_de_9NumDims), this.NumDims.functional_3_1_typ_2);
-
-            % Add:
-            functional_3_1_typ_1 = functional_3_1_typ_3 + this.Vars.functional_3_1_type_;
-            functional_3_1_typ_1NumDims = max(coder.const(functional_3_1_typ_3NumDims), this.NumDims.functional_3_1_type_);
+            functional_1_type__1 = functional_1_type__3 + this.Vars.functional_1_type_1_;
+            functional_1_type__1NumDims = max(coder.const(functional_1_type__3NumDims), this.NumDims.functional_1_type_1_);
 
             % Softmax:
-            [type, typeNumDims] = test_model.coder.ops.onnxSoftmax13(functional_3_1_typ_1, -1, coder.const(functional_3_1_typ_1NumDims));
+            [type, typeNumDims] = test_model.coder.ops.onnxSoftmax13(functional_1_type__1, -1, coder.const(functional_1_type__1NumDims));
+
+            % MatMul:
+            [functional_1_dens_4, functional_1_dens_4NumDims] = test_model.coder.ops.onnxMatMul(functional_1_globa_1, this.functional_1_dens_2, coder.const(functional_1_globa_1NumDims), this.NumDims.functional_1_dens_2);
+
+            % Add:
+            functional_1_dens_1 = functional_1_dens_4 + this.Vars.functional_1_dense_1;
+            functional_1_dens_1NumDims = max(coder.const(functional_1_dens_4NumDims), this.NumDims.functional_1_dense_1);
+
+            % LeakyRelu:
+            functional_1_dens_3 = leakyrelu(dlarray(functional_1_dens_1), 0.200000);
+            functional_1_dens_3NumDims = coder.const(functional_1_dens_1NumDims);
+
+            % Add:
+            functional_1_add_1_A = functional_1_dens_3 + functional_1_globa_3;
+            functional_1_add_1_ANumDims = max(coder.const(functional_1_dens_3NumDims), coder.const(functional_1_globa_3NumDims));
+
+            % MatMul:
+            [functional_1_dens_11, functional_1_dens_11NumDims] = test_model.coder.ops.onnxMatMul(functional_1_add_1_A, this.functional_1_dens_9, coder.const(functional_1_add_1_ANumDims), this.NumDims.functional_1_dens_9);
+
+            % Add:
+            functional_1_dens_8 = functional_1_dens_11 + this.Vars.functional_1_dense_2;
+            functional_1_dens_8NumDims = max(coder.const(functional_1_dens_11NumDims), this.NumDims.functional_1_dense_2);
+
+            % LeakyRelu:
+            functional_1_dens_10 = leakyrelu(dlarray(functional_1_dens_8), 0.200000);
+            functional_1_dens_10NumDims = coder.const(functional_1_dens_8NumDims);
+
+            % MatMul:
+            [functional_1_dista_2, functional_1_dista_2NumDims] = test_model.coder.ops.onnxMatMul(functional_1_dens_10, this.functional_1_dista_1, coder.const(functional_1_dens_10NumDims), this.NumDims.functional_1_dista_1);
+
+            % Add:
+            distance = functional_1_dista_2 + this.Vars.functional_1_distanc;
+            distanceNumDims = max(coder.const(functional_1_dista_2NumDims), this.NumDims.functional_1_distanc);
 
             % Set graph output arguments
-            typeNumDims1007 = typeNumDims;
+            typeNumDims1008 = typeNumDims;
+            distanceNumDims1009 = distanceNumDims;
 
         end
 
