@@ -1,5 +1,4 @@
 * text=auto
-
 *.fig binary
 *.mat binary
 *.mdl binary diff merge=mlAutoMerge
@@ -29,5 +28,6 @@
 *.pdf binary
 *.png binary
 *.xlsx binary
+Training_Dataset_mra.mat filter=lfs diff=lfs merge=lfs -text
 *.mat filter=lfs diff=lfs merge=lfs -text
 *.parquet filter=lfs diff=lfs merge=lfs -text
