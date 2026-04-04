@@ -68,4 +68,5 @@ for f = 34:44
         end
     end
     Simulink.fault.enable(powersysModel+"/Model/Transmission Line (Three-Phase)3/Section interface", false);
+   
 end

@@ -1,5 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <MF0 version="1.1" packageUris="http://schema.mathworks.com/mf0/faultinfo_datamodel/R2021a">
+  <faultinfo.FailureModeContainer type="faultinfo.FailureModeContainer" uuid="44016eaf-68a1-4cf5-8b19-9bd12f922ad9">
+    <failureModes type="faultinfo.FailureMode" uuid="40849788-01e4-4a86-bd87-9c1ac7300a44">
+      <ID>1</ID>
+      <associatedFaults type="faultinfo.SSFault" uuid="cfda6ec8-ebbc-4dc9-9a1f-ebb0563d0e45"/>
+      <faultSubsystemName>Faultq</faultSubsystemName>
+      <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
+    </failureModes>
+    <failureModes type="faultinfo.FailureMode" uuid="668ed44b-078d-4b5b-8ec8-3f1d54dda760">
+      <ID>2</ID>
+      <associatedFaults type="faultinfo.SSFault" uuid="deac8288-1bf8-498b-b7fe-3b3d6bf70487"/>
+      <faultSubsystemName>Fault2</faultSubsystemName>
+      <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
+    </failureModes>
+    <failureModes type="faultinfo.FailureMode" uuid="1e066e2e-d16e-4113-b3ae-4d0cfab88024">
+      <ID>3</ID>
+      <associatedFaults type="faultinfo.SSFault" uuid="e819c35b-d65c-4a3d-820b-b1286c7b3e6e"/>
+      <faultSubsystemName>Fault3</faultSubsystemName>
+      <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
+    </failureModes>
+    <failureModes type="faultinfo.FailureMode" uuid="f6ec844d-6555-4560-bb48-ddcb6369892f">
+      <ID>4</ID>
+      <associatedFaults type="faultinfo.SSFault" uuid="d75399f0-463c-4fb2-844f-3a838687f591"/>
+      <faultSubsystemName>Fault4</faultSubsystemName>
+      <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
+    </failureModes>
+    <faultModelName>realtime_test_reference_FaultModel</faultModelName>
+    <faultModelUUID>8a2c548a-7d00-4df7-89f3-e03e98fea0b6</faultModelUUID>
+  </faultinfo.FailureModeContainer>
   <faultinfo.FaultContainerSet type="faultinfo.FaultContainerSet" uuid="d3169b88-0ba4-42b0-b32d-5c223fc3dc56">
     <conditionals type="faultinfo.conditional.Conditional" uuid="a69e261c-8c76-4544-a899-87635d4a5176">
       <checksum>95c5ecc9-6274-48a3-97ae-d5d10baf62f1</checksum>
@@ -122,32 +150,4 @@
     <modelName>realtime_test_reference</modelName>
     <modelUUID>6c01a5af-2796-41c5-ba5f-14da73c0273d</modelUUID>
   </faultinfo.FaultContainerSet>
-  <faultinfo.FailureModeContainer type="faultinfo.FailureModeContainer" uuid="44016eaf-68a1-4cf5-8b19-9bd12f922ad9">
-    <failureModes type="faultinfo.FailureMode" uuid="40849788-01e4-4a86-bd87-9c1ac7300a44">
-      <ID>1</ID>
-      <associatedFaults type="faultinfo.SSFault" uuid="cfda6ec8-ebbc-4dc9-9a1f-ebb0563d0e45"/>
-      <faultSubsystemName>Faultq</faultSubsystemName>
-      <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
-    </failureModes>
-    <failureModes type="faultinfo.FailureMode" uuid="668ed44b-078d-4b5b-8ec8-3f1d54dda760">
-      <ID>2</ID>
-      <associatedFaults type="faultinfo.SSFault" uuid="deac8288-1bf8-498b-b7fe-3b3d6bf70487"/>
-      <faultSubsystemName>Fault2</faultSubsystemName>
-      <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
-    </failureModes>
-    <failureModes type="faultinfo.FailureMode" uuid="1e066e2e-d16e-4113-b3ae-4d0cfab88024">
-      <ID>3</ID>
-      <associatedFaults type="faultinfo.SSFault" uuid="e819c35b-d65c-4a3d-820b-b1286c7b3e6e"/>
-      <faultSubsystemName>Fault3</faultSubsystemName>
-      <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
-    </failureModes>
-    <failureModes type="faultinfo.FailureMode" uuid="f6ec844d-6555-4560-bb48-ddcb6369892f">
-      <ID>4</ID>
-      <associatedFaults type="faultinfo.SSFault" uuid="d75399f0-463c-4fb2-844f-3a838687f591"/>
-      <faultSubsystemName>Fault4</faultSubsystemName>
-      <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
-    </failureModes>
-    <faultModelName>realtime_test_reference_FaultModel</faultModelName>
-    <faultModelUUID>8a2c548a-7d00-4df7-89f3-e03e98fea0b6</faultModelUUID>
-  </faultinfo.FailureModeContainer>
 </MF0>

@@ -5,6 +5,7 @@ interface3 = 50;
 interface4 = 50;
 
 load_p = 1e3;
+NR = 1e-3;
 i = 1;
 
 powersysModel = "training_data_switching";
