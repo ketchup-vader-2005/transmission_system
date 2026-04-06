@@ -47,46 +47,46 @@ set_param(powersysModel, 'SimulationCommand', 'start');
 set_param(powersysModel, 'SimulationCommand', 'pause');
 
 for i = 1:size(schedule, 1)
-    startS   = schedule{i,1};
-    endS     = schedule{i,2};
+    startS = schedule{i,1};
+    endS   = schedule{i,2};
     faultIdx = schedule{i,3};
-    path     = schedule{i,4};
+    path   = schedule{i,4};
 
-    % --- 1. SET UP FAULT ---
-    % We enable the path and the specific fault property
-    Simulink.fault.enable(powersysModel + path, true);
-    activate(myfaults(faultIdx)) 
+    % --- 1. SETUP ---
+    if i > 1
+        Simulink.fault.enable(powersysModel + schedule{i-1,4}, false);
+    end
     
-    % Use update to push these changes into the paused simulation
+    Simulink.fault.enable(powersysModel + path, true);
+    myfaults(faultIdx).Active = true; 
+    
+    % Force the workspace change into the model
     set_param(powersysModel, 'SimulationCommand', 'update'); 
     drawnow;
 
-    % --- 2. START THE RUN ---
+    % --- 2. THE KICKSTART ---
+    % Take ONE step to get off T=0.000
+    set_param(powersysModel, 'SimulationCommand', 'step');
+    pause(0.1); % Give the engine a moment to process the step
+    
+    % --- 3. THE RUN ---
     set_param(powersysModel, 'SimulationCommand', 'continue');
     
-    % --- 3. THE WAIT LOOP ---
-    % This is where MATLAB "holds the line" until the simulation catches up
+    % --- 4. THE MONITORING LOOP ---
     currentSample = round(get_param(powersysModel, 'SimulationTime') * Fs);
-    
     while currentSample < endS
-        % Keep checking the simulation clock
         currentSample = round(get_param(powersysModel, 'SimulationTime') * Fs);
         
-        % Check if the simulation stopped naturally (at StopTime)
-        if strcmpi(get_param(powersysModel, 'SimulationStatus'), 'stopped')
-            break; 
+        % If it gets stuck at 0, re-send continue once
+        if currentSample == 0
+             set_param(powersysModel, 'SimulationCommand', 'continue');
         end
         
-        % Give the CPU a tiny bit of room to process the simulation
         pause(0.01); 
+        if strcmpi(get_param(powersysModel, 'SimulationStatus'), 'stopped'), break; end
     end
     
-    % --- 4. THE FORCE PAUSE ---
-    % Once the while loop breaks, we are at endS. We MUST pause here.
+    % --- 5. THE PRECISION PAUSE ---
     set_param(powersysModel, 'SimulationCommand', 'pause');
-    
-    % Deactivate for the next iteration
-    Simulink.fault.enable(powersysModel + path, false);
-    
-    fprintf('Iteration %d finished. Paused at sample %d.\n', i, currentSample);
+    fprintf('Iteration %d: Stopped at sample %d\n', i, currentSample);
 end
