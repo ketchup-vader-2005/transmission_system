@@ -54,7 +54,7 @@ classdef Slice_To_UnsqueezeLayer1000 < nnet.layer.Layer & nnet.layer.Formattable
         function this = Slice_To_UnsqueezeLayer1000(mlInstance)
             this.Name = mlInstance.Name;
             this.NumInputs = 2;
-            this.OutputNames = {'functional_4_1_co_2'};
+            this.OutputNames = {'functional_2_1_co_2'};
             if isstruct(mlInstance.Vars)
                 names = fieldnames(mlInstance.Vars);
                 for i=1:numel(names)
@@ -68,7 +68,7 @@ classdef Slice_To_UnsqueezeLayer1000 < nnet.layer.Layer & nnet.layer.Formattable
             this.NumDims = mlInstance.NumDims;
         end
 
-        function [functional_4_1_co_2] = predict(this, feature_input__, feature_inputNumDims__)
+        function [functional_2_1_co_2] = predict(this, feature_input__, feature_inputNumDims__)
             if isdlarray(feature_input__)
                 feature_input_ = stripdims(feature_input__);
             else
@@ -77,72 +77,72 @@ classdef Slice_To_UnsqueezeLayer1000 < nnet.layer.Layer & nnet.layer.Formattable
             feature_inputNumDims = numel(feature_inputNumDims__);
             feature_input = test_model_v2.coder.ops.permuteInputVar(feature_input_, ['as-is'], 3);
 
-            [functional_4_1_co_2__, functional_4_1_co_2NumDims__] = Slice_To_UnsqueezeGraph1000(this, feature_input, feature_inputNumDims, false);
-            functional_4_1_co_2_ = test_model_v2.coder.ops.permuteOutputVar(functional_4_1_co_2__, [2 3 4 1], 4);
+            [functional_2_1_co_2__, functional_2_1_co_2NumDims__] = Slice_To_UnsqueezeGraph1000(this, feature_input, feature_inputNumDims, false);
+            functional_2_1_co_2_ = test_model_v2.coder.ops.permuteOutputVar(functional_2_1_co_2__, [2 3 4 1], 4);
 
-            functional_4_1_co_2 = dlarray(single(functional_4_1_co_2_), 'SSCB');
+            functional_2_1_co_2 = dlarray(single(functional_2_1_co_2_), 'SSCB');
         end
 
-        function [functional_4_1_co_2, functional_4_1_co_2NumDims1001] = Slice_To_UnsqueezeGraph1000(this, feature_input, feature_inputNumDims, Training)
+        function [functional_2_1_co_2, functional_2_1_co_2NumDims1001] = Slice_To_UnsqueezeGraph1000(this, feature_input, feature_inputNumDims, Training)
 
             % Execute the operators:
             % Slice:
-            [indices1000, functional_4_1_str_3NumDims] = test_model_v2.coder.ops.prepareSliceArgs(feature_input, this.Vars.const_starts__119, this.Vars.const_ends__120, this.Vars.const_axes__127, '', coder.const(feature_inputNumDims));
-            functional_4_1_str_3 = feature_input(indices1000{:});
+            [indices1000, functional_2_1_str_3NumDims] = test_model_v2.coder.ops.prepareSliceArgs(feature_input, this.Vars.const_starts__8, this.Vars.const_ends__9, this.Vars.const_axes__13, '', coder.const(feature_inputNumDims));
+            functional_2_1_str_3 = feature_input(indices1000{:});
 
             % Sub:
-            functional_4_1_no_1 = functional_4_1_str_3 - this.Vars.functional_4_1_norma;
-            functional_4_1_no_1NumDims = max(coder.const(functional_4_1_str_3NumDims), this.NumDims.functional_4_1_norma);
+            functional_2_1_no_7 = functional_2_1_str_3 - this.Vars.functional_2_1_no_6;
+            functional_2_1_no_7NumDims = max(coder.const(functional_2_1_str_3NumDims), this.NumDims.functional_2_1_no_6);
 
             % Slice:
-            [indices1001, functional_4_1_str_2NumDims] = test_model_v2.coder.ops.prepareSliceArgs(feature_input, this.Vars.const_starts__122, this.Vars.const_ends__123, this.Vars.const_axes__127, '', coder.const(feature_inputNumDims));
-            functional_4_1_str_2 = feature_input(indices1001{:});
+            [indices1001, functional_2_1_str_2NumDims] = test_model_v2.coder.ops.prepareSliceArgs(feature_input, this.Vars.const_starts__11, this.Vars.const_ends__12, this.Vars.const_axes__13, '', coder.const(feature_inputNumDims));
+            functional_2_1_str_2 = feature_input(indices1001{:});
 
             % Sub:
-            functional_4_1_no_4 = functional_4_1_str_2 - this.Vars.functional_4_1_no_3;
-            functional_4_1_no_4NumDims = max(coder.const(functional_4_1_str_2NumDims), this.NumDims.functional_4_1_no_3);
+            functional_2_1_no_10 = functional_2_1_str_2 - this.Vars.functional_2_1_no_9;
+            functional_2_1_no_10NumDims = max(coder.const(functional_2_1_str_2NumDims), this.NumDims.functional_2_1_no_9);
 
             % Slice:
-            [indices1002, functional_4_1_str_1NumDims] = test_model_v2.coder.ops.prepareSliceArgs(feature_input, this.Vars.const_starts__125, this.Vars.const_ends__126, this.Vars.const_axes__127, '', coder.const(feature_inputNumDims));
-            functional_4_1_str_1 = feature_input(indices1002{:});
+            [indices1002, functional_2_1_str_1NumDims] = test_model_v2.coder.ops.prepareSliceArgs(feature_input, this.Vars.const_starts__14, this.Vars.const_ends__15, this.Vars.const_axes__13, '', coder.const(feature_inputNumDims));
+            functional_2_1_str_1 = feature_input(indices1002{:});
 
             % Sub:
-            functional_4_1_no_7 = functional_4_1_str_1 - this.Vars.functional_4_1_no_6;
-            functional_4_1_no_7NumDims = max(coder.const(functional_4_1_str_1NumDims), this.NumDims.functional_4_1_no_6);
+            functional_2_1_no_1 = functional_2_1_str_1 - this.Vars.functional_2_1_norma;
+            functional_2_1_no_1NumDims = max(coder.const(functional_2_1_str_1NumDims), this.NumDims.functional_2_1_norma);
 
             % Slice:
-            [indices1003, functional_4_1_stridNumDims] = test_model_v2.coder.ops.prepareSliceArgs(feature_input, this.Vars.const_starts__128, this.Vars.const_ends__129, this.Vars.const_axes__127, '', coder.const(feature_inputNumDims));
-            functional_4_1_strid = feature_input(indices1003{:});
+            [indices1003, functional_2_1_stridNumDims] = test_model_v2.coder.ops.prepareSliceArgs(feature_input, this.Vars.const_starts__17, this.Vars.const_ends__18, this.Vars.const_axes__13, '', coder.const(feature_inputNumDims));
+            functional_2_1_strid = feature_input(indices1003{:});
 
             % Sub:
-            functional_4_1_no_10 = functional_4_1_strid - this.Vars.functional_4_1_no_9;
-            functional_4_1_no_10NumDims = max(coder.const(functional_4_1_stridNumDims), this.NumDims.functional_4_1_no_9);
+            functional_2_1_no_4 = functional_2_1_strid - this.Vars.functional_2_1_no_3;
+            functional_2_1_no_4NumDims = max(coder.const(functional_2_1_stridNumDims), this.NumDims.functional_2_1_no_3);
 
             % Mul:
-            functional_4_1_no_11 = functional_4_1_no_10 .* this.Vars.ConstantFolding_fu_3;
-            functional_4_1_no_11NumDims = max(coder.const(functional_4_1_no_10NumDims), this.NumDims.ConstantFolding_fu_3);
+            functional_2_1_no_11 = functional_2_1_no_10 .* this.Vars.ConstantFolding_fu_3;
+            functional_2_1_no_11NumDims = max(coder.const(functional_2_1_no_10NumDims), this.NumDims.ConstantFolding_fu_3);
 
             % Mul:
-            functional_4_1_no_8 = functional_4_1_no_7 .* this.Vars.ConstantFolding_fu_2;
-            functional_4_1_no_8NumDims = max(coder.const(functional_4_1_no_7NumDims), this.NumDims.ConstantFolding_fu_2);
+            functional_2_1_no_8 = functional_2_1_no_7 .* this.Vars.ConstantFolding_fu_2;
+            functional_2_1_no_8NumDims = max(coder.const(functional_2_1_no_7NumDims), this.NumDims.ConstantFolding_fu_2);
 
             % Mul:
-            functional_4_1_no_5 = functional_4_1_no_4 .* this.Vars.ConstantFolding_fu_1;
-            functional_4_1_no_5NumDims = max(coder.const(functional_4_1_no_4NumDims), this.NumDims.ConstantFolding_fu_1);
+            functional_2_1_no_5 = functional_2_1_no_4 .* this.Vars.ConstantFolding_fu_1;
+            functional_2_1_no_5NumDims = max(coder.const(functional_2_1_no_4NumDims), this.NumDims.ConstantFolding_fu_1);
 
             % Mul:
-            functional_4_1_no_2 = functional_4_1_no_1 .* this.Vars.ConstantFolding_func;
-            functional_4_1_no_2NumDims = max(coder.const(functional_4_1_no_1NumDims), this.NumDims.ConstantFolding_func);
+            functional_2_1_no_2 = functional_2_1_no_1 .* this.Vars.ConstantFolding_func;
+            functional_2_1_no_2NumDims = max(coder.const(functional_2_1_no_1NumDims), this.NumDims.ConstantFolding_func);
 
             % Concat:
-            [functional_4_1_conca, functional_4_1_concaNumDims] = test_model_v2.coder.ops.onnxConcat(2, {functional_4_1_no_2, functional_4_1_no_5, functional_4_1_no_8, functional_4_1_no_11}, [coder.const(functional_4_1_no_2NumDims), coder.const(functional_4_1_no_5NumDims), coder.const(functional_4_1_no_8NumDims), coder.const(functional_4_1_no_11NumDims)]);
+            [functional_2_1_conca, functional_2_1_concaNumDims] = test_model_v2.coder.ops.onnxConcat(2, {functional_2_1_no_8, functional_2_1_no_11, functional_2_1_no_2, functional_2_1_no_5}, [coder.const(functional_2_1_no_8NumDims), coder.const(functional_2_1_no_11NumDims), coder.const(functional_2_1_no_2NumDims), coder.const(functional_2_1_no_5NumDims)]);
 
             % Unsqueeze:
-            [shape1004, functional_4_1_co_2NumDims] = test_model_v2.coder.ops.prepareUnsqueezeArgs(functional_4_1_conca, this.Vars.const_fold_opt__213, coder.const(functional_4_1_concaNumDims));
-            functional_4_1_co_2 = reshape(functional_4_1_conca, shape1004);
+            [shape1004, functional_2_1_co_2NumDims] = test_model_v2.coder.ops.prepareUnsqueezeArgs(functional_2_1_conca, this.Vars.const_fold_opt__104, coder.const(functional_2_1_concaNumDims));
+            functional_2_1_co_2 = reshape(functional_2_1_conca, shape1004);
 
             % Set graph output arguments
-            functional_4_1_co_2NumDims1001 = functional_4_1_co_2NumDims;
+            functional_2_1_co_2NumDims1001 = functional_2_1_co_2NumDims;
 
         end
 

@@ -6,9 +6,14 @@ interface4 = 30;
 load_p = 1e3;
 NR = 1e-3;
 trigger_samples = 80;
-x = 0;
+
+for i = 1:44
+    varName = sprintf('x%d', i);
+    assignin('base', varName, 0);
+end
 
 powersysModel = "training_data_switching";
+refModel = "training_data_switching_reference";
 
 Interface = [30, 60, 90];
 NR_values = [1e-3, 0.032, 0.422];
@@ -38,53 +43,71 @@ while ~strcmpi(get_param(powersysModel, 'SimulationStatus'), 'stopped')
     currentTime = get_param(powersysModel, 'SimulationTime');
     
     % 4. PERFORM logic based on the sample count
-    if currentTime == 80/Fs
+    if currentTime == 20/Fs
+        set_param(powersysModel, 'SimulationCommand', 'pause');
+        fprintf('At sample 0. Injecting fault LG now...\n');
+        activate(myfaults(1));
+        Simulink.fault.injection(powersysModel, true);
+        Simulink.fault.updateReferences(powersysModel);
+        set_param(powersysModel, 'SimulationCommand', 'update');
+
+    elseif currentTime == 80/Fs
+        set_param(powersysModel, 'SimulationCommand', 'pause');
         fprintf('At sample 80. Injecting fault LG now...\n');
-        assignin('base', 'x', 1);
-        Simulink.fault.enable(powersysModel+"/Model/Transmission Line (Three-Phase)/Section interface", true);
-        activate(myfaults(f(1)));
-        
+        assignin('base', 'x1', 1);
+        set_param(powersysModel, 'SimulationCommand', 'update');
+
     elseif currentTime == 320/Fs
+        set_param(powersysModel, 'SimulationCommand', 'pause');
         fprintf('At sample 320. Stoping LG fault now...\n');
-        assignin('base', 'x', 0);
-        Simulink.fault.enable(powersysModel+"/Model/Transmission Line (Three-Phase)/Section interface", false);
+        assignin('base', 'x1', 0);
+        activate(myfaults(2));
+        Simulink.fault.injection(powersysModel, true);
+        Simulink.fault.updateReferences(powersysModel);
+        set_param(powersysModel, 'SimulationCommand', 'update');
 
     elseif currentTime == 400/Fs
+        set_param(powersysModel, 'SimulationCommand', 'pause');
         fprintf('At sample 400. Injecting fault LL now...\n');
-        assignin('base', 'x', 1);
-        Simulink.fault.enable(powersysModel+"/Model/Transmission Line (Three-Phase)1/Section interface", true);
-        activate(myfaults(f(2)));
+        assignin('base', 'x2', 1);
+        set_param(powersysModel, 'SimulationCommand', 'update');
 
     elseif currentTime == 640/Fs
+        set_param(powersysModel, 'SimulationCommand', 'pause');
         fprintf('At sample 640. Stoping LL fault now...\n');
-        assignin('base', 'x', 0);
         Simulink.fault.enable(powersysModel+"/Model/Transmission Line (Three-Phase)1/Section interface", false);
+        set_param(powersysModel, 'SimulationCommand', 'update');
 
     elseif currentTime == 720/Fs
+        set_param(powersysModel, 'SimulationCommand', 'pause');
         fprintf('At sample 720. Injecting fault LLG now...\n');
-        assignin('base', 'x', 1);
-        Simulink.fault.enable(powersysModel+"/Model/Transmission Line (Three-Phase)2/Section interface", true);        
+        Simulink.fault.enable(powersysModel+"/Model/Transmission Line (Three-Phase)2/Section interface", true);
         activate(myfaults(f(3)));
+        set_param(powersysModel, 'SimulationCommand', 'update');
 
     elseif currentTime == 960/Fs
+        set_param(powersysModel, 'SimulationCommand', 'pause');
         fprintf('At sample 960. Stopping fault LLG now...\n');
-        assignin('base', 'x', 0);
         Simulink.fault.enable(powersysModel+"/Model/Transmission Line (Three-Phase)2/Section interface", false);
+        set_param(powersysModel, 'SimulationCommand', 'update');
 
     elseif currentTime == 1040/Fs
+        set_param(powersysModel, 'SimulationCommand', 'pause');
         fprintf('At sample 1040. Injecting fault LLL/LLLG now...\n');
-        assignin('base', 'x', 1);
         Simulink.fault.enable(powersysModel+"/Model/Transmission Line (Three-Phase)3/Section interface", true);
         activate(myfaults(f(4)));
+        set_param(powersysModel, 'SimulationCommand', 'update');
         
     elseif currentTime == 1280/Fs
+        set_param(powersysModel, 'SimulationCommand', 'pause');
         fprintf('At sample 1280. Stopping fault LLL/LLLG now...\n');
-        assignin('base', 'x', 0);
         Simulink.fault.enable(powersysModel+"/Model/Transmission Line (Three-Phase)3/Section interface", false);
+        set_param(powersysModel, 'SimulationCommand', 'update');
     end
 
-    drawnow;
     
+    drawnow;
+
     % 5. ADVANCE the simulation by one step
     set_param(powersysModel, 'SimulationCommand', 'step');
     

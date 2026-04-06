@@ -15,7 +15,7 @@ Interface = [30, 60, 90];
 Load = [0.8*1e3, 1e3, 1.2*1e3];
 NR_values = [1e-3, 0.032, 0.422];
 
-open_system(powersysModel)
+open_system(powersysModel);
 
 myfaults = Simulink.fault.findFaults(powersysModel);
 names = {myfaults.Name};

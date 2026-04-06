@@ -270,9 +270,10 @@
   </faultinfo.FailureModeContainer>
   <faultinfo.FaultContainerSet type="faultinfo.FaultContainerSet" uuid="7de3ed33-39fb-44dd-a825-2be0a9c21c88">
     <conditionals type="faultinfo.conditional.Conditional" uuid="e3088087-5c00-48bb-b384-842fdded41fa">
-      <checksum>13e83d96-c3cc-421a-8615-09564782ac84</checksum>
+      <checksum>4f41a209-e314-4f0d-ac8a-3401fd3e2f5c</checksum>
       <condition>x_1 &gt; 0</condition>
-      <conditionalTriggers type="faultinfo.ConditionalTrigger" uuid="3939ccc2-0fba-4c41-9365-0c2001548050"/>
+      <conditionalTriggers type="faultinfo.ConditionalTrigger" uuid="78e446fe-539c-415e-bc65-d14aaa039e64"/>
+      <conditionalTriggers type="faultinfo.ConditionalTrigger" uuid="847d535b-db40-44ea-84c8-44a060d2a746"/>
       <mustBeLogged>false</mustBeLogged>
       <name>Cond1</name>
       <resyncRefBlkID></resyncRefBlkID>
@@ -284,9 +285,8 @@
       </symbols>
     </conditionals>
     <conditionals type="faultinfo.conditional.Conditional" uuid="c8a34120-0880-42d7-b850-310eb5aae0a3">
-      <checksum>722ea935-3b1e-401b-8904-ea0323d7ac4e</checksum>
+      <checksum>31a23195-cf43-4324-9842-9a6e71e701de</checksum>
       <condition>x_2  &gt; 0</condition>
-      <conditionalTriggers type="faultinfo.ConditionalTrigger" uuid="2923d84d-d7cf-456a-b462-c2e62390575a"/>
       <mustBeLogged>false</mustBeLogged>
       <name>Cond2</name>
       <resyncRefBlkID></resyncRefBlkID>
@@ -886,25 +886,25 @@
       </symbols>
     </conditionals>
     <faultContainers type="faultinfo.FaultContainer" uuid="4c96d1ea-2aff-4158-b797-b501e355bdc2">
-      <activeFault type="faultinfo.SSFault" uuid="c51b0e41-2b3f-4728-826f-5c5094a996df"/>
+      <activeFault type="faultinfo.SSFault" uuid="9d95931f-3cf9-49ef-b55a-866215da7034"/>
       <faultedEntityID>SSSubelement|training_data_switching:1|training_data_switching_reference:18|Section interface</faultedEntityID>
       <faultedEntityName>training_data_switching/Model/Transmission Line (Three-Phase)/Section interface</faultedEntityName>
       <faults type="faultinfo.SSFault" uuid="9d95931f-3cf9-49ef-b55a-866215da7034">
-        <checksum>89058c5c-c9f3-4918-a70c-c450cf52ebf2</checksum>
+        <checksum>eda7d5a7-5287-4411-b554-8f2fba669d19</checksum>
         <faultDescription></faultDescription>
         <faultName>Fault1</faultName>
         <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
-        <triggerOn type="faultinfo.ConditionalTrigger" uuid="3939ccc2-0fba-4c41-9365-0c2001548050">
+        <triggerOn type="faultinfo.ConditionalTrigger" uuid="78e446fe-539c-415e-bc65-d14aaa039e64">
           <isPersistent>false</isPersistent>
         </triggerOn>
       </faults>
       <faults type="faultinfo.SSFault" uuid="dc6523a2-9b97-4a50-a928-dc81ff3c0742">
-        <checksum>90ce634d-08a8-417d-af8a-7051b1ea8645</checksum>
+        <checksum>aa1a84f2-868a-4671-ae06-9e6e05a0d272</checksum>
         <faultDescription></faultDescription>
         <faultName>Fault2</faultName>
         <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
-        <triggerOn type="faultinfo.ConditionalTrigger" uuid="2923d84d-d7cf-456a-b462-c2e62390575a">
-          <isPersistent>true</isPersistent>
+        <triggerOn type="faultinfo.ConditionalTrigger" uuid="847d535b-db40-44ea-84c8-44a060d2a746">
+          <isPersistent>false</isPersistent>
         </triggerOn>
       </faults>
       <faults type="faultinfo.SSFault" uuid="109520ad-a4a9-42b0-803e-13de79246381">
@@ -991,7 +991,7 @@
       <isEnabled>false</isEnabled>
     </faultContainers>
     <faultContainers type="faultinfo.FaultContainer" uuid="dd634ef2-0c84-4afe-8488-17ddacc0a139">
-      <activeFault type="faultinfo.SSFault" uuid="2878f3ac-fd34-440c-805b-b01880ce2f22"/>
+      <activeFault type="faultinfo.SSFault" uuid="c836b5f2-27a8-438e-88c2-a66f67acfc7a"/>
       <faultedEntityID>SSSubelement|training_data_switching:1|training_data_switching_reference:19|Section interface</faultedEntityID>
       <faultedEntityName>training_data_switching/Model/Transmission Line (Three-Phase)1/Section interface</faultedEntityName>
       <faults type="faultinfo.SSFault" uuid="2865e192-bc4b-4acd-94ed-3dacbe7a19a2">
@@ -1306,7 +1306,7 @@
       <isEnabled>false</isEnabled>
     </faultContainers>
     <isEnabled>true</isEnabled>
-    <lastUpdatedAt>2026-04-06T08:02:55</lastUpdatedAt>
+    <lastUpdatedAt>2026-04-06T21:41:07</lastUpdatedAt>
     <modelName>training_data_switching</modelName>
     <modelUUID>e89ab65c-2695-42b4-a536-9648a01f4698</modelUUID>
   </faultinfo.FaultContainerSet>

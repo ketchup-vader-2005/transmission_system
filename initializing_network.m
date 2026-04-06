@@ -5,4 +5,4 @@ inputSize = [10 240]; % 10 Channels, 240 Time steps
 dummyData = dlarray(single(rand(inputSize)), 'CT'); 
 net = initialize(net, dummyData);
 analyzeNetwork(net);
-save("my_model_test_new.mat", "net");
+save("my_model_test_toolbox.mat", "net");
