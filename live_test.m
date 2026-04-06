@@ -105,9 +105,10 @@ for f = 1:11
                         % 2. Create the row for the CURRENT window
                         LT = [predicted_type_toolbox; distance_toolbox; predicted_type_engine; distance_engine];
                         T = array2table(LT', 'VariableNames', {'predicted_type_toolbox', 'distance_toolbox', 'predicted_type_engine', 'distance_engine'});
-                        T.FaultID = repmat(Fault, height(T_mini), 1);
-                        T.Interface = repmat(interface1, height(T_mini), 1);
-                        storage_bucket_livetest{i} = T_mini;
+                        T.FaultID = repmat(Fault, height(T), 1);
+                        T.Interface = repmat(interface1, height(T), 1);
+                        Output_values = table({T}, 'VariableNames', {'Model Outputs'});
+                        storage_bucket_livetest{i} = Output_values;
                         
                         localIdx = 1;
                         I = zeros(3, 320);
@@ -138,6 +139,8 @@ for f = 1:11
         end
     end
 end
+
+save("Model_output.mat", "storage_bucket_livetest");
 
 for f = 12:22
     Simulink.fault.enable(powersysModel+"/Model/Transmission Line (Three-Phase)1/Section interface", true);
@@ -202,9 +205,10 @@ for f = 12:22
                         % 2. Create the row for the CURRENT window
                         LT = [predicted_type_toolbox; distance_toolbox; predicted_type_engine; distance_engine];
                         T = array2table(LT', 'VariableNames', {'predicted_type_toolbox', 'distance_toolbox', 'predicted_type_engine', 'distance_engine'});
-                        T.FaultID = repmat(Fault, height(T_mini), 1);
-                        T.Interface = repmat(interface2, height(T_mini), 1);
-                        storage_bucket_livetest{i} = T_mini;
+                        T.FaultID = repmat(Fault, height(T), 1);
+                        T.Interface = repmat(interface2, height(T), 1);
+                        Output_values = table({T}, 'VariableNames', {'Model Outputs'});
+                        storage_bucket_livetest{i} = Output_values;
                 
                         localIdx = 1;
                         I = zeros(3, 320);
@@ -236,6 +240,8 @@ for f = 12:22
     end
     Simulink.fault.enable(powersysModel+"/Model/Transmission Line (Three-Phase)1/Section interface", false);
 end
+
+save("Model_output.mat", "storage_bucket_livetest");
 
 for f = 23:33
     Simulink.fault.enable(powersysModel+"/Model/Transmission Line (Three-Phase)2/Section interface", true);
@@ -300,9 +306,10 @@ for f = 23:33
                         % 2. Create the row for the CURRENT window
                         LT = [predicted_type_toolbox; distance_toolbox; predicted_type_engine; distance_engine];
                         T = array2table(LT', 'VariableNames', {'predicted_type_toolbox', 'distance_toolbox', 'predicted_type_engine', 'distance_engine'});
-                        T.FaultID = repmat(Fault, height(T_mini), 1);
-                        T.Interface = repmat(interface3, height(T_mini), 1);
-                        storage_bucket_livetest{i} = T_mini;
+                        T.FaultID = repmat(Fault, height(T), 1);
+                        T.Interface = repmat(interface3, height(T), 1);
+                        Output_values = table({T}, 'VariableNames', {'Model Outputs'});
+                        storage_bucket_livetest{i} = Output_values;
                 
                         localIdx = 1;
                         I = zeros(3, 320);
@@ -334,6 +341,8 @@ for f = 23:33
     end
     Simulink.fault.enable(powersysModel+"/Model/Transmission Line (Three-Phase)2/Section interface", false);
 end
+
+save("Model_output.mat", "storage_bucket_livetest");
 
 for f = 34:44
     Simulink.fault.enable(powersysModel+"/Model/Transmission Line (Three-Phase)3/Section interface", true);
@@ -398,9 +407,10 @@ for f = 34:44
                         % 2. Create the row for the CURRENT window
                         LT = [predicted_type_toolbox; distance_toolbox; predicted_type_engine; distance_engine];
                         T = array2table(LT', 'VariableNames', {'predicted_type_toolbox', 'distance_toolbox', 'predicted_type_engine', 'distance_engine'});
-                        T.FaultID = repmat(Fault, height(T_mini), 1);
-                        T.Interface = repmat(interface4, height(T_mini), 1);
-                        storage_bucket_livetest{i} = T_mini;
+                        T.FaultID = repmat(Fault, height(T), 1);
+                        T.Interface = repmat(interface4, height(T), 1);
+                        Output_values = table({T}, 'VariableNames', {'Model Outputs'});
+                        storage_bucket_livetest{i} = Output_values;
                 
                         localIdx = 1;
                         I = zeros(3, 320);
@@ -431,5 +441,6 @@ for f = 34:44
         end
     end
     Simulink.fault.enable(powersysModel+"/Model/Transmission Line (Three-Phase)3/Section interface", false);
-   
 end
+
+save("Model_output.mat", "storage_bucket_livetest");
