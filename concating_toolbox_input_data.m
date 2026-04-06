@@ -27,3 +27,4 @@ Training_Dataset_temp = Training_Dataset_temp(sortIdx, :);
 
 Training_Dataset = vertcat(Training_Dataset_temp, training_data_healthy);
 save("Training_Dataset_toolbox.mat", "Training_Dataset");
+parquetwrite("Training_Dataset_toolbox.parquet", Training_Dataset);
